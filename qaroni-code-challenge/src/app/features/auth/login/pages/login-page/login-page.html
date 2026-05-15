@@ -1,0 +1,8 @@
+<app-login-form
+[username]="store.username()"
+[password]="store.password()"
+[loading]="store.loading()"
+(usernameChange)="onUsernameChange($event)"
+(passwordChange)="onPasswordChange($event)"
+(formSubmit)="onSubmit()"
+></app-login-form>
