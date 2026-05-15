@@ -1,0 +1,26 @@
+.form-wrap {
+  @apply border-0  md:border-2 max-w-xs w-full p-6 lg:max-w-md md:shadow-[10px_10px_0px_0px_rgba(0,0,0,0.1)];
+}
+.form-header{
+  &__title {
+    @apply text-2xl font-bold lg:text-4xl text-blue-900;
+  }
+  &__subtitle {
+    @apply text-center w-full text-xs text-gray-500 lg:text-sm pb-4;
+  }
+}
+.form-container {
+  @apply flex flex-col gap-4;
+  &__input {
+    @apply bg-transparent !important;
+  }
+  mat-icon{
+    @apply text-blue-900;
+  }
+}
+.form-footer {
+  @apply flex justify-center;
+  &__button {
+    @apply cursor-pointer w-60;
+  }
+}
