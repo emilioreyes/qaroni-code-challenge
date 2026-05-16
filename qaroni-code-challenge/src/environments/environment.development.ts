@@ -1,4 +1,5 @@
 export const environment = {
-    URL_BASE: 'https://rest.api.plaam.net/v1',
-    MERCHANT_ID: 80
+    URL_BASE: '',
+    MERCHANT_ID: 80,
+    DATE_TIME_FORMAT: 'MM/dd/yyyy HH:mm:ss'
 };

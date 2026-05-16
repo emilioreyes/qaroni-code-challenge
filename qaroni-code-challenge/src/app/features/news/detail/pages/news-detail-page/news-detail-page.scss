@@ -1,0 +1,15 @@
+.card {
+  @apply m-4 rounded-lg border bg-white shadow-md;
+}
+
+.card {
+&--title {
+    @apply text-center pb-3 text-lg font-semibold text-gray-800;
+  }
+  &--subtitle {
+    @apply flex items-center justify-between text-gray-400 py-3;
+  }
+  &--content {
+    @apply p-4 text-gray-700;
+  } 
+}
