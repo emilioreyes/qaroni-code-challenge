@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { LoginForm } from '../../components/login-form/login-form';
 import { LoginStore } from '../../store/login.store';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -11,7 +12,8 @@ import { LoginStore } from '../../store/login.store';
 })
 export class LoginPage {
   store = inject(LoginStore);
-
+  router = inject(Router);
+  
   onUsernameChange(value: string) {
     this.store.updateField('username', value);
   }

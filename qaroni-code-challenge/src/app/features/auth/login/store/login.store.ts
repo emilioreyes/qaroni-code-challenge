@@ -3,9 +3,24 @@ import { patchState, signalStore, withComputed, withMethods, withState } from '@
 import { AuthApi } from '../../../../core/api/auth.api';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, EMPTY, finalize, pipe, switchMap, tap } from 'rxjs';
+import { TokenStore } from '../../session/store/token.store';
+import { Router } from '@angular/router';
 export interface LoginFormValue {
   username: string;
   password: string;
+}
+
+export interface LoginResult {
+  userId: number;
+  access_token: string;
+  issued: string;
+  expires: string;
+}
+
+export interface LoginResponse {
+  input: string;
+  result: LoginResult[];
+  links: unknown | null;
 }
 export interface AuthUser {
   id: string;
@@ -20,10 +35,10 @@ export interface AuthSession {
 
 export interface LoginState {
   form: LoginFormValue;
-  session: AuthSession | null;
   error: string | null;
   submitted: boolean;
   loading: boolean;
+  auth: LoginResult | null;
 }
 
 const initialState: LoginState = {
@@ -31,7 +46,7 @@ const initialState: LoginState = {
     username: '',
     password: '',
   },
-  session: null,
+  auth: null,
   error: null,
   submitted: false,
   loading: false,
@@ -53,10 +68,11 @@ export const LoginStore = signalStore(
   withComputed((store) => ({
     username: computed(() => store.form().username),
     password: computed(() => store.form().password),
-    isAuthenticated: computed(() => !!store.session),
+    isAuthenticated: computed(() => !!store.auth()?.access_token),
   })),
 
-  withMethods((store, authApi = inject(AuthApi)) => ({
+  withMethods((store, authApi = inject(AuthApi), 
+  tokenStore = inject(TokenStore),router = inject(Router)) => ({
     updateField<K extends keyof LoginFormValue>(key: K, value: LoginFormValue[K]) {
       patchState(store, (state) => ({
         form: {
@@ -94,7 +110,7 @@ export const LoginStore = signalStore(
     resetForm() {
       patchState(store, {
         ...initialState,
-        session: store.session(),
+        auth: store.auth(),
       });
     },
 
@@ -114,11 +130,17 @@ export const LoginStore = signalStore(
         switchMap(() => {
           const form = store.form();
           return authApi.login(toLoginRequest(form)).pipe(
-            tap((session) => {
+            tap((response: LoginResponse) => {
+              const auth = response.result[0];
+              if (!auth || !auth.access_token) {
+                throw new Error('Invalid login response: missing access token');
+              }
+              tokenStore.setToken(auth.access_token);
               patchState(store, {
                 error: null,
-                session: session as AuthSession,
+                auth: auth,
               });
+              router.navigate(['/list']);
             }),
             catchError((error) => {
               patchState(store, {
