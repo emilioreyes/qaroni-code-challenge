@@ -9,6 +9,9 @@ export const routes: Routes = [
     },{
         path: 'list',
         loadComponent: () => import('./features/news/list/pages/news-list-page/news-list-page').then(m => m.NewsListPage),
+    },{
+        path:'groups',
+        loadComponent: () => import('./features/groups/list/pages/groups-list-page/groups-list-page').then(m => m.GroupsListPage),
     }
 
 ];
