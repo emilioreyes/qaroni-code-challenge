@@ -31,9 +31,7 @@ import { NewsDetailPage } from '../../../detail/pages/news-detail-page/news-deta
   styleUrl: './news-list.scss',
 })
 export class NewsList implements AfterViewInit, OnChanges {
-  /*modalComponentType!: Type<any>;
-  modalInputs: { [key: string]: any }={};
-  modalComponent:any=null*/
+
   dialog = inject(MatDialog);
 
   readonly environment = environment;

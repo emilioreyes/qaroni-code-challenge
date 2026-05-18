@@ -1,0 +1,7 @@
+<app-groups-list
+[items]="store.filteredItems()"
+[loading]="store.loading()"
+[error]="store.error()"
+[total]="store.totalItems()"
+(filterChange)="onStatusChange($event)"
+></app-groups-list>

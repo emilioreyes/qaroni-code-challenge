@@ -1,0 +1,122 @@
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="hasActivity">
+      <th mat-header-cell *matHeaderCellDef>Has Activity</th>
+      <td mat-cell *matCellDef="let element">
+        <span
+          class="severity-container"
+          [ngClass]="{ active: element.hasActivity, inactive: !element.hasActivity }"
+        >
+          {{ element.hasActivity ? 'Yes' : 'No' }}
+        </span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="hasApproval">
+      <th mat-header-cell *matHeaderCellDef>Has Approval</th>
+      <td mat-cell *matCellDef="let element">
+        <span
+          class="severity-container"
+          [ngClass]="{ active: element.hasApproval, inactive: !element.hasApproval }"
+        >
+          {{ element.hasApproval ? 'Yes' : 'No' }}
+        </span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="hasPartner">
+      <th mat-header-cell *matHeaderCellDef>Has Partner</th>
+      <td mat-cell *matCellDef="let element">
+        <span
+          class="severity-container"
+          [ngClass]="{ active: element.hasPartner, inactive: !element.hasPartner }"
+        >
+          {{ element.hasPartner ? 'Yes' : 'No' }}
+        </span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="isPaid">
+      <th mat-header-cell *matHeaderCellDef>Paid</th>
+      <td mat-cell *matCellDef="let element">
+        <span
+          class="severity-container"
+          [ngClass]="{ active: element.isPaid, inactive: !element.isPaid }"
+        >
+          {{ element.isPaid ? 'Yes' : 'No' }}
+        </span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="isPartner">
+      <th mat-header-cell *matHeaderCellDef>Partner</th>
+      <td mat-cell *matCellDef="let element">
+        <span
+          class="severity-container"
+          [ngClass]="{ active: element.isPartner, inactive: !element.isPartner }"
+        >
+          {{ element.isPartner ? 'Yes' : 'No' }}
+        </span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="isSubscribed">
+      <th mat-header-cell *matHeaderCellDef>Subscribed</th>
+      <td mat-cell *matCellDef="let element">
+        <span
+          class="severity-container"
+          [ngClass]="{ active: element.isSubscribed, inactive: !element.isSubscribed }"
+        >
+          {{ element.isSubscribed ? 'Yes' : 'No' }}
+        </span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="slug">
+      <th mat-header-cell *matHeaderCellDef>Slug</th>
+      <td mat-cell *matCellDef="let element">{{ element.slug }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let element">
+        <span
+          class="severity-container"
+          [ngClass]="{ active: element.status === 'ACTIVE', inactive: element.status !== 'ACTIVE' }"
+        >
+          {{ element.status }}
+        </span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Controls">
+      <th mat-header-cell *matHeaderCellDef>Controls</th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          (click)="onView(element)"
+          matMiniFab
+          aria-label="Example icon button with a menu icon"
+          color="primary"
+        >
+          <mat-icon color="primary">visibility</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[10, 25, 50]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
+  </mat-paginator>
+</div>
