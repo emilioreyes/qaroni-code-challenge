@@ -1,3 +1,6 @@
+@if (store.loading()) {
+  <app-progress-bar></app-progress-bar>
+}
 <app-groups-list
 [items]="store.filteredItems()"
 [loading]="store.loading()"

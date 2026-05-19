@@ -1,9 +1,12 @@
 .card {
-  @apply m-4 rounded-lg border bg-white shadow-md;
+  @apply m-4 max-h-[80vh] rounded-lg border bg-white shadow-md overflow-y-auto;
+  &--header {
+    @apply border-b p-4 w-full;
+  }
 }
 
 .card {
-&--title {
+  &--title {
     @apply text-center pb-3 text-lg font-semibold text-gray-800;
   }
   &--subtitle {
