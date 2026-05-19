@@ -6,5 +6,11 @@ import { TokenStore } from '../../features/auth/session/store/token.store';
 export const loginGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const tokenStore = inject(TokenStore);
-  return tokenStore.isAuthenticated() ? router.createUrlTree(['/list']) : true;
+  const token = tokenStore.token();
+  const expiresAt = tokenStore.expiresAt();
+  if(!token || !expiresAt){
+    return true;
+  }
+
+  return new Date(expiresAt).getTime() > Date.now()  ? router.createUrlTree(['/home/news']) : true;
 };

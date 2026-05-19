@@ -21,6 +21,7 @@ import {
   MAT_DIALOG_DATA,
   MatDialogTitle,
   MatDialogContent,
+  
 } from '@angular/material/dialog'
 import { NewsDetailPage } from '../../../detail/pages/news-detail-page/news-detail-page';
 

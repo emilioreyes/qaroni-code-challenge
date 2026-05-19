@@ -1,0 +1,13 @@
+
+
+.main__list{
+    @apply ml-2 bg-gray-600;
+    &--item{
+        @apply bg-red-300;
+    }
+}
+.submenu__list{
+    &--item{
+        @apply ml-4 bg-green-400
+    }
+}

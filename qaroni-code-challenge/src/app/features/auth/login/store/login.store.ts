@@ -136,11 +136,12 @@ export const LoginStore = signalStore(
                 throw new Error('Invalid login response: missing access token');
               }
               tokenStore.setToken(auth.access_token);
+              tokenStore.setExpiration(auth.expires);
               patchState(store, {
                 error: null,
                 auth: auth,
               });
-              router.navigate(['/list']);
+              router.navigate(['/home/news']);
             }),
             catchError((error) => {
               patchState(store, {
