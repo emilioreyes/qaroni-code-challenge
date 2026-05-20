@@ -141,7 +141,7 @@ export const LoginStore = signalStore(
                 error: null,
                 auth: auth,
               });
-              router.navigate(['/home/news']);
+              router.navigate(['/home/groups']);
             }),
             catchError((error) => {
               patchState(store, {

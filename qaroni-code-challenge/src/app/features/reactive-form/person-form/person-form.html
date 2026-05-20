@@ -1,0 +1,86 @@
+<form [formGroup]="form" class="form-container">
+  <h1>Person container</h1>
+  <div class="form-person-container">
+    <mat-form-field class="example-full-width">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Ex. John Doe" formControlName="name" />
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Age</mat-label>
+      <input matInput placeholder="Ex. 30" formControlName="age" type="number" />
+    </mat-form-field>
+  </div>
+
+  <div formArrayName="children">
+    <h1>Children container</h1>
+    @for (child of getChildren().controls; track $index) {
+      <div [formGroupName]="$index" class="form-child-container">
+        <mat-form-field class="example-full-width">
+          <mat-label>Child Name</mat-label>
+          <input matInput id="child-name-{{ $index }}" formControlName="name" type="text" />
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Child Age</mat-label>
+          <input matInput id="child-age-{{ $index }}" formControlName="age" type="number" />
+        </mat-form-field>
+        <button matButton="outlined" type="button" (click)="removeChild($index)">
+          Remove Child
+        </button>
+      </div>
+    }
+  </div>
+  <div formArrayName="movies">
+    <h1>Movies container</h1>
+    @for (movie of getMovies().controls; track $index) {
+      <div [formGroupName]="$index" class="form-movie-container">
+        <mat-form-field class="example-full-width">
+          <mat-label>Movie Name</mat-label>
+          <input matInput id="movie-name-{{ $index }}" formControlName="name" type="text" />
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Director</mat-label>
+          <input matInput id="movie-director-{{ $index }}" formControlName="director" type="text" />
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Movie Year</mat-label>
+          <input matInput id="movie-year-{{ $index }}" formControlName="year" type="number" />
+        </mat-form-field>
+        <mat-radio-group formControlName="wonOscar">
+          <mat-radio-button [value]="true">Won Oscar</mat-radio-button>
+          <mat-radio-button [value]="false">Did Not Win Oscar</mat-radio-button>
+        </mat-radio-group>
+        <button matButton="outlined" type="button" (click)="removeMovie($index)">
+          Remove Movie
+        </button>
+      </div>
+    }
+  </div>
+  <div class="form-buttons-container">
+    <button
+      matButton="filled"
+      type="button"
+      color="primary"
+      (click)="loadMockPersonWithoutChildren()"
+    >
+      Load Mock Person Without Children
+    </button>
+    <button matButton="filled" type="button" color="primary" (click)="loadMockPersonWithOneChild()">
+      Load Mock Person With One Child
+    </button>
+    <button
+      matButton="filled"
+      type="button"
+      color="primary"
+      (click)="loadMockPersonWithSeveralChildren()"
+    >
+      Load Mock Person With Several Children
+    </button>
+    <button matButton="filled" type="button" color="warn" (click)="resetFormstate()">
+      Reset Form
+    </button>
+    <button matButton="filled" type="button" color="accent" (click)="showForm()">Show Form</button>
+  </div>
+</form>
