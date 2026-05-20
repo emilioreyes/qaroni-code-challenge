@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GroupsListPage } from './groups-list-page';
+import { GroupsListStore } from '../../store/groups-list.store';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('GroupsListPage', () => {
   let component: GroupsListPage;
@@ -8,7 +10,10 @@ describe('GroupsListPage', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GroupsListPage]
+      imports: [GroupsListPage],
+      providers: [{ provide: GroupsListStore},
+        provideHttpClient()
+      ],
     })
     .compileComponents();
 

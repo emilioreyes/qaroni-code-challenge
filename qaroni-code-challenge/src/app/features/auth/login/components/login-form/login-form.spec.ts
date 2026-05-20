@@ -13,8 +13,10 @@ describe('LoginForm', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(LoginForm);
-    component = fixture.componentInstance;
+    fixture.componentRef.setInput('username', 'testuser');
+    fixture.componentRef.setInput('password', 'testpassword');
     fixture.detectChanges();
+    component = fixture.componentInstance;
   });
 
   it('should create', () => {

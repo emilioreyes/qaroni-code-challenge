@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Home } from './home';
+import { TokenStore } from '../../auth/session/store/token.store';
+import { provideRouter, Router } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('Home', () => {
   let component: Home;
@@ -8,7 +11,10 @@ describe('Home', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Home]
+      imports: [Home],
+      providers: [{ provide: TokenStore, useValue: {} },
+        provideHttpClient(),provideRouter([])
+      ]
     })
     .compileComponents();
 
