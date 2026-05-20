@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { loginGuard } from './core/guard/login-guard';
 import { authGuard, authGuardChild } from './core/guard/auth-guard';
+import { PersonForm } from './features/reactive-form/person-form/person-form';
 
 export const routes: Routes = [
   {
@@ -29,8 +30,12 @@ export const routes: Routes = [
             (m) => m.GroupsListPage,
           ),
       },
-      {path: '', pathMatch: 'full', redirectTo: 'news'}
+      {
+        path: 'form',
+        component: PersonForm,
+      },
+      { path: '', pathMatch: 'full', redirectTo: 'groups' },
     ],
   },
-  { path: '', pathMatch: 'full', redirectTo: 'login' }
+  { path: '', pathMatch: 'full', redirectTo: 'login' },
 ];
