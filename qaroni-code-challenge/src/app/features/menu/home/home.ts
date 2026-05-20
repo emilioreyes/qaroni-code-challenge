@@ -1,4 +1,4 @@
-import { Component, effect, inject, untracked } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { Navbar } from '../navbar/navbar';
 import { CommonModule } from '@angular/common';
@@ -27,8 +27,4 @@ export class Home {
   closeNavbar(value:boolean){
     this.show=!this.show
   }
-
-
-
-
 }
